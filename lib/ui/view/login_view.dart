@@ -1,8 +1,10 @@
-import 'package:admin_dashboard/router/router.dart';
-import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
 import 'package:flutter/material.dart';
+import 'package:admin_dashboard/router/router.dart';
 
-import '../buttoms/custom_outline_buttom.dart';
+import 'package:admin_dashboard/ui/buttoms/custom_outline_buttom.dart';
+import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
+
+
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
