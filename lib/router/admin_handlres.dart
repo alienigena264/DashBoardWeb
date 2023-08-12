@@ -1,7 +1,8 @@
 
+import 'package:fluro/fluro.dart';
 
 import 'package:admin_dashboard/ui/view/login_view.dart';
-import 'package:fluro/fluro.dart';
+import 'package:admin_dashboard/ui/view/register_view.dart';
 
 class AdminHandlers {
 
@@ -11,5 +12,10 @@ class AdminHandlers {
     }
   );
 
+  static Handler register= Handler(
+    handlerFunc: ( context, params ) {
+      return const RegisterView();
+    }
+  );
   
 }

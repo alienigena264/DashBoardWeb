@@ -17,9 +17,9 @@ class Fluroroure {
 
   static void configureRoutes() {
     //Auth routes
-    router.define(rootRoute, handler: AdminHandlers.login);
-    router.define(loginRoute, handler: AdminHandlers.login);
-    // router.define(registerRoute, handler: null);
+    router.define(rootRoute, handler: AdminHandlers.login, transitionType: TransitionType.fadeIn);
+    router.define(loginRoute, handler: AdminHandlers.login, transitionType: TransitionType.fadeIn);
+    router.define(registerRoute, handler: AdminHandlers.register, transitionType: TransitionType.fadeIn);
 
     //Dashboard routes
     // router.define(dashboardRoute, handler: null);

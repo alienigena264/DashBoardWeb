@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import '../buttoms/custom_outline_buttom.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class RegisterView extends StatelessWidget {
+  const RegisterView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +18,24 @@ class LoginView extends StatelessWidget {
             constraints: const BoxConstraints(maxWidth: 370),
             child: Form(
               child: Column(children: [
+                
                 TextFormField(
                   // validator: ,
                   style: const TextStyle(color: Colors.white),
                   decoration: CustomInputs.logInInpuDecoration(
-                      hint: "Ingrese el correo",
-                      label: "Email",
+                      hint: "Ingrese su nombre",
+                      label: "Nombre",
+                      icon: Icons.person_outline),
+                ),
+                const SizedBox(
+            height: 20,
+          ),
+          TextFormField(
+                  // validator: ,
+                  style: const TextStyle(color: Colors.white),
+                  decoration: CustomInputs.logInInpuDecoration(
+                      hint: "Ingrese su correo",
+                      label: "Correo",
                       icon: Icons.email_outlined),
                 ),
                 const SizedBox(
@@ -34,16 +46,14 @@ class LoginView extends StatelessWidget {
                   // validator: ,
                   style: const TextStyle(color: Colors.white),
                   decoration: CustomInputs.logInInpuDecoration(
-                      hint: "Ingrese la contraseña",
-                      label: "*******",
+                      hint: "********",
+                      label: "Contraseña",
                       icon: Icons.lock_outline),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                const CustomOutlineButtom(
-                  text: 'Iniciar Sesión',
-                ),
+                const CustomOutlineButtom(text: 'Crear Cuenta'),
                 const SizedBox(
                   height: 20,
                 ),
@@ -53,15 +63,15 @@ class LoginView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
-                        "¿No tienes una cuenta?",
+                        "¿Ya tienes una cuenta?",
                         style: TextStyle(color: Colors.white),
                       ),
                       TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, Fluroroure.registerRoute);
+                            Navigator.pushNamed(context, Fluroroure.loginRoute);
                           },
                           child: const Text(
-                            "Registrate",
+                            "Inicia Sesión",
                             style: TextStyle(color: Colors.blue),
                           ))
                     ],
