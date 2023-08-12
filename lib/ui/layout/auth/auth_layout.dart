@@ -10,18 +10,20 @@ class AuthLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-        body: ListView(
-          physics: const ClampingScrollPhysics(),
-      children: [
-        //deskop
-        _DesktopBody(child: child),
-        //mobile
-
-        //linkbar
-        const LinksBar(),
-      ],
-    ));
+        body: Scrollbar(
+          child: ListView(
+              physics: const ClampingScrollPhysics(),
+              children: [
+          (size.width > 1000)
+              ? _DesktopBody(child: child)
+              : _Mobilebody(child: child),
+          //linkbar
+          const LinksBar(),
+              ],
+            ),
+        ));
   }
 }
 
@@ -33,7 +35,7 @@ class _DesktopBody extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       width: size.width,
-      height: size.height * 0.9,
+      height: size.height * 0.92,
       color: Colors.black,
       child: Row(children: [
         //photo
@@ -49,7 +51,6 @@ class _DesktopBody extends StatelessWidget {
                   height: 20,
                 ),
                 const CustomTittle(),
-
                 const SizedBox(
                   height: 20,
                 ),
@@ -58,5 +59,35 @@ class _DesktopBody extends StatelessWidget {
             ))
       ]),
     );
+  }
+}
+
+class _Mobilebody extends StatelessWidget {
+  const _Mobilebody({required this.child});
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        color: Colors.black,
+        child:  Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            const CustomTittle(),
+            SizedBox(
+              width: double.infinity,
+              height: 420,
+              child: child,),
+              Container(
+                width: double.infinity,
+                height: 400,
+                color: Colors.black,
+                child: const CustomBackground(),
+              )
+          ],
+        ));
   }
 }

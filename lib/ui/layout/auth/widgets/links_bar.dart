@@ -8,10 +8,11 @@ class LinksBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-        height: size.height * 0.1,
+        height: (size.width > 1000 ) ? size.height * 0.08: null,
         width: double.infinity,
         color: Colors.black,
         child: Wrap(
+          alignment: WrapAlignment.center,
           children: [
             LinkBottom(
               text: 'About',
