@@ -1,4 +1,5 @@
 import 'package:admin_dashboard/providers/login_form_provider.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:admin_dashboard/router/router.dart';
 
@@ -26,11 +27,18 @@ class LoginView extends StatelessWidget {
               child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 370),
                   child: Form(
+                    autovalidateMode: AutovalidateMode.always,
                     key: loginFormProvider.formKey,
                     child: Column(children: [
                       //Email
                       TextFormField(
-                        // validator: ,
+                        validator:(value) {
+                          if(EmailValidator.validate(value ?? '') == false){
+                            return 'Por favor, ingrese un correo válido';
+                          }
+                          return null;
+                        },
+                        onChanged: (value) => loginFormProvider.email = value,
                         style: const TextStyle(color: Colors.white),
                         decoration: CustomInputs.logInInpuDecoration(
                             hint: "Ingrese el correo",
@@ -44,7 +52,9 @@ class LoginView extends StatelessWidget {
                       //Password
                       TextFormField(
                         obscureText: true,
+                        onChanged: (value) => loginFormProvider.password = value,
                         validator: (value) {
+                          // Si el password es vacío, retorna un error
                           if (value == null || value.isEmpty) {
                             return 'Por favor, ingrese una contraseña';
                           }
