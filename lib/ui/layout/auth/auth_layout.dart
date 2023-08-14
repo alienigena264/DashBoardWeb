@@ -40,7 +40,8 @@ class _DesktopBody extends StatelessWidget {
       color: Colors.black,
       child: Row(children: [
         //photo
-        const CustomBackground(),
+        const Expanded(child: CustomBackground()),
+        
         //Top
         Container(
             width: 600,

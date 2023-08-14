@@ -1,21 +1,24 @@
-import 'package:admin_dashboard/providers/login_form_provider.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:admin_dashboard/providers/auth_provider.dart';
+import 'package:admin_dashboard/providers/login_form_provider.dart';
+
+import 'package:email_validator/email_validator.dart';
 import 'package:admin_dashboard/router/router.dart';
 
 import 'package:admin_dashboard/ui/buttoms/custom_outline_buttom.dart';
 import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
-import 'package:provider/provider.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = AuthProvider();
     return ChangeNotifierProvider(
         create: (_) => LoginFormProvider(),
         child: Builder(builder: (context) {
-
           final loginFormProvider =
               Provider.of<LoginFormProvider>(context, listen: false);
 
@@ -32,8 +35,8 @@ class LoginView extends StatelessWidget {
                     child: Column(children: [
                       //Email
                       TextFormField(
-                        validator:(value) {
-                          if(EmailValidator.validate(value ?? '') == false){
+                        validator: (value) {
+                          if (EmailValidator.validate(value ?? '') == false) {
                             return 'Por favor, ingrese un correo válido';
                           }
                           return null;
@@ -52,13 +55,14 @@ class LoginView extends StatelessWidget {
                       //Password
                       TextFormField(
                         obscureText: true,
-                        onChanged: (value) => loginFormProvider.password = value,
+                        onChanged: (value) =>
+                            loginFormProvider.password = value,
                         validator: (value) {
                           // Si el password es vacío, retorna un error
                           if (value == null || value.isEmpty) {
                             return 'Por favor, ingrese una contraseña';
                           }
-                          if (!hasUppercase(value) ) {
+                          if (!hasUppercase(value)) {
                             return 'La contraseña debe contener al menos una letra mayúscula ';
                           }
                           if (value.length < 8) {
@@ -80,8 +84,12 @@ class LoginView extends StatelessWidget {
 
                       //Boton Iniciar Sesion
                       CustomOutlineButtom(
-                        onPressed: (){
-                          loginFormProvider.validateForm();
+                        onPressed: () {
+                          final isValid = loginFormProvider.validateForm();
+                          if (isValid) {
+                            authProvider.login(loginFormProvider.email,
+                                loginFormProvider.password);
+                          }
                         },
                         text: 'Iniciar Sesión',
                       ),
