@@ -5,9 +5,10 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomOutlineButtom extends StatelessWidget {
   final String text;
+  final Function? onPressed;
   
   const CustomOutlineButtom({
-    super.key, required this.text,
+    super.key, required this.text,  this.onPressed  ,
   });
 
   @override
@@ -23,7 +24,7 @@ class CustomOutlineButtom extends StatelessWidget {
               shape: const StadiumBorder(),
               side: const BorderSide(color: Colors.blue),
             ),
-            onPressed: () {},
+            onPressed: onPressed as void Function()?,
             child: Text(
               text,
               style: GoogleFonts.montserratAlternates(
